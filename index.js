@@ -116,5 +116,7 @@ schedule.scheduleJob('0 0 * * *', () => {
     })
     //Send tweet everyday at 2pm.
 schedule.scheduleJob('0 14 * * *', () => {
-    tweet()
-})
+        tweet()
+    })
+    //Populate Database on start then wait for cron job
+getNewPost()
