@@ -1,19 +1,19 @@
 {
-  "name": "cableporn",
-  "version": "1.0.0",
-  "description": "Send cablePorn image from reddit to Twitter",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon start",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Asthriona Ng, Rise Takahashi",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "mongoose": "^5.11.18",
-    "node-schedule": "^2.0.0",
-    "superagent": "^6.1.0",
-    "twit": "^2.2.11"
-  }
+    "name": "cableporn",
+    "version": "1.0.0",
+    "description": "Send cablePorn image from reddit to Twitter",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon start",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Asthriona Ng, Rise Takahashi",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.21.1",
+        "mongoose": "^5.11.18",
+        "node-schedule": "^2.0.0",
+        "superagent": "^6.1.0",
+        "twit": "^2.2.11"
+    }
 }
