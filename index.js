@@ -27,6 +27,7 @@ const T = new Twit({
     access_token_secret: Config.access_token_secret
 })
 
+//BASIC API STUFF
 // Request post from reddit and check if the ID is in database, if not save them locally and add them to DB
 async function getNewPost() {
     axios.get(`https://www.reddit.com/r/cableporn.json?sort=top&t=week&limit=800`, { limit: 800 })
@@ -120,3 +121,26 @@ schedule.scheduleJob('0 14 * * *', () => {
     })
     //Populate Database on start then wait for cron job
 getNewPost()
+
+//SOCKET STUFF AKA STREAMS
+var stream = T.stream('statuses/filter', { track: Config.account })
+Post.countDocuments({}, function(err, count) {
+    var totalPost = count
+    Post.countDocuments({ isPosted: false }, function(err, c) {
+        var totalUnpost = c
+
+        stream.on('tweet', (tweet) => {
+            if (tweet.text.split(" ").slice(1)[0] === "info") {
+                var tweetID = tweet.id_str;
+                var name = tweet.user.screen_name;
+                const randNumb = Math.round(Math.random() * (1000000 - 9999999 + 1) + 9999999)
+                T.post('statuses/update', {
+                    in_reply_to_status_id: tweetID,
+                    status: `@${name}\n Total Posts: ${totalPost}\nPicture unposted yet: ${totalUnpost}\n random: ${randNumb}`
+                }, function(err, data, response) {
+                    console.log(data)
+                })
+            }
+        })
+    });
+});
