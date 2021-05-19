@@ -49,7 +49,7 @@ async function getNewPost() {
                                 pictname: data.url_overridden_by_dest,
                                 title: data.title,
                                 Author: data.author,
-                                url: data.url,
+                                url: `https://reddit.com${data.permalink}`,
                                 isPosted: false
                             })
                             newPost.save()
