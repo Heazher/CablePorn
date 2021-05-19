@@ -115,7 +115,7 @@ schedule.scheduleJob('0 0 * * *', () => {
         getNewPost()
         console.log("New image saved.")
     })
-    //Send tweet everyday at 2pm.
+    //Send tweet everyday at 2pm GTM.
 schedule.scheduleJob('0 14 * * *', () => {
         tweet()
     })
@@ -133,14 +133,23 @@ Post.countDocuments({}, function(err, count) {
             if (tweet.text.split(" ").slice(1)[0] === "info") {
                 var tweetID = tweet.id_str;
                 var name = tweet.user.screen_name;
-                const randNumb = Math.round(Math.random() * (1000000 - 9999999 + 1) + 9999999)
-                T.post('statuses/update', {
-                    in_reply_to_status_id: tweetID,
-                    status: `@${name}\n Total Posts: ${totalPost}\nPicture unposted yet: ${totalUnpost}\n random: ${randNumb}`
-                }, function(err, data, response) {
-                    console.log(data)
-                })
+                if (err) {
+                    console.log(err)
+                    T.post('statuses/update', {
+                        in_reply_to_status_id: tweetID,
+                        status: `Yikes! An error happen... \n${err.message}`
+                    }, function(err, data, response) {
+                        console.log(data)
+                    })
+                }
             }
+            const randNumb = Math.round(Math.random() * (1000000 - 9999999 + 1) + 9999999)
+            T.post('statuses/update', {
+                in_reply_to_status_id: tweetID,
+                status: `@${name}\n Total Posts: ${totalPost}\nPicture unposted yet: ${totalUnpost}\n random: ${randNumb}`
+            }, function(err, data, response) {
+                console.log(`@${name} Total Posts: ${totalPost}\nPicture unposted yet: ${totalUnpost}\n random: ${randNumb}`)
+            })
         })
     });
 });
