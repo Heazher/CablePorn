@@ -24,5 +24,5 @@ Fill all the information.
 Note: account must be the bot account name without the @. for me it would look like this: `"account": "_RiseDev"`
 
 ## More information: 
-This bot is running on NodeJS 14, we havent tested it on older version, because this is a side project, and our main project is [Yukiko](https://Yukiko.app) and its running on NodeJS 14.  
+This bot is running on NodeJS 14, we havent tested it on older version, because this is a side project, and our main project [Yukiko](https://Yukiko.app) is running on NodeJS 14.  
 This bot is owned by [Yukiko Dev Team](https://github.com/Yukiko-Dev-Team)
