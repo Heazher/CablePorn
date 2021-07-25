@@ -115,8 +115,17 @@ schedule.scheduleJob('0 0 * * *', () => {
         getNewPost()
         console.log("New image saved.")
     })
-    //Send tweet everyday at 2PM GTM.
+    //Send tweet everyday at 7AM, 12AM, 2PM and 17PM GTM.
+schedule.scheduleJob('0 7 * * *', () => {
+    tweet()
+})
+schedule.scheduleJob('0 12 * * *', () => {
+    tweet()
+})
 schedule.scheduleJob('0 14 * * *', () => {
+    tweet()
+})
+schedule.scheduleJob('0 17 * * *', () => {
         tweet()
     })
     //Populate Database on start then wait for cron job
