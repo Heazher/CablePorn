@@ -30,7 +30,7 @@ const T = new Twit({
 //BASIC API STUFF
 // Request post from reddit and check if the ID is in database, if not save them locally and add them to DB
 async function getNewPost() {
-    axios.get(`https://www.reddit.com/r/cableporn.json?sort=top&t=week&limit=800`, { limit: 800 })
+    axios.get(`https://www.reddit.com/r/cableporn.json?sort=top&t=week&limit=800`)
         .then(res => {
             res.data.data.children.forEach(reddit => {
 
@@ -115,7 +115,7 @@ schedule.scheduleJob('0 0 * * *', () => {
         getNewPost()
         console.log("New image saved.")
     })
-    //Send tweet everyday at 2pm GTM.
+    //Send tweet everyday at 2PM GTM.
 schedule.scheduleJob('0 14 * * *', () => {
         tweet()
     })
