@@ -66,7 +66,7 @@ async function getNewPost() {
                             const url = data.url_overridden_by_dest
                             const path = './images/' + data.id + '.jpg'
                             await download(url, path, () => {
-                                console.log('✅ Done!')
+                                console.log(`✅ ${data.id} has been locally saved.`)
                             })
                         } else {
                             console.log(`${data.id} has already been saved in database.`)
@@ -107,14 +107,13 @@ async function postImage(image) {
         })
     })
 }
-
 // TIMING AND EXECUTING FUNCTION ON TIME
 
 // Get new Imges everyday at midnight.
-schedule.scheduleJob('0 0 * * *', () => {
-        getNewPost()
-        console.log("New image saved.")
-    })
+// schedule.scheduleJob('0 0 * * *', () => {
+//         getNewPost()
+//         console.log("New image saved.")
+//     })
     //Send tweet everyday at 7AM, 12AM, 2PM and 17PM GTM.
 // schedule.scheduleJob('0 7 * * *', () => {
 //     tweet()
@@ -124,9 +123,9 @@ schedule.scheduleJob('0 0 * * *', () => {
 // })
 schedule.scheduleJob('0 14 * * *', () => {
     tweet()
-})
-// schedule.scheduleJob('0 17 * * *', () => {
-//         tweet()
-//     })
-    //Populate Database on start then wait for cron job
-getNewPost()
+});
+schedule.scheduleJob('0 17 * * *', () => {
+        tweet()
+});
+//Populate Database on start then wait for cron job
+getNewPost();
