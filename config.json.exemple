@@ -1,7 +1,15 @@
 {
-    "dbLink": "mongodb://USER:PASSWORD@localhost:27017/DATABASE?authSource=admin",
-    "consumer_key": "TWITTER-CONSUMER-KEY",
-    "consumer_secret": "TWITTER-CONSUMER-SECRET",
-    "access_token": "TWITTER-ACCESS-TOKEN",
-    "access_token_secret": "TWITTER-ACCESS-TOKEN-SECRET"
+  "dbLink": "mongodb://USER:PASSWORD@localhost:27017/DATABASE?authSource=admin",
+  "consumer_key": "TWITTER-CONSUMER-KEY",
+  "consumer_secret": "TWITTER-CONSUMER-SECRET",
+  "account_token": {
+    "cableporn": {
+      "access_token": "ACCOUNT_ONE_ACCESS_TOKEN",
+      "access_token_secret": "ACCOUNT_ONE_ACCESS_TOKEN_SECRET"
+    },
+    "cablegore": {
+      "access_token": "ACCOUNT_TWO_ACCESS_TOKEN",
+      "access_token_secret": "ACCOUNT_TWO_ACCESS_TOKEN_SECRET"
+    }
+  }
 }
