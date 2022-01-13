@@ -1,3 +1,8 @@
+/* 
+* NOTICE:
+* This file should be deleted soon, we are still testing the new client.
+* - Asthriona
+*/
 const axios = require("axios");
 const mongoose = require('mongoose');
 const Twit = require("twit");
@@ -75,6 +80,10 @@ async function getNewPost() {
                 }
             });
         })
+        .catch((err) => {
+            console.log(err);
+            tweetError(err);
+          });
 }
 // Send Tweet with the last non-sent image.
 async function tweet() {
@@ -110,10 +119,10 @@ async function postImage(image) {
 // TIMING AND EXECUTING FUNCTION ON TIME
 
 // Get new Imges everyday at midnight.
-// schedule.scheduleJob('0 0 * * *', () => {
-//         getNewPost()
-//         console.log("New image saved.")
-//     })
+schedule.scheduleJob('0 0 * * *', () => {
+        getNewPost()
+        console.log("New image saved.")
+    })
     //Send tweet everyday at 7AM, 12AM, 2PM and 17PM GTM.
 // schedule.scheduleJob('0 7 * * *', () => {
 //     tweet()
