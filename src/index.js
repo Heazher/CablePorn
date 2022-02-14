@@ -36,6 +36,9 @@ const account = {
 getPosts(account.cablePorn);
 // getPosts(account.cableGore);
 
+// tweet on start (test)
+CablePorn();
+
 // Schedules (might move that to an API endpoint using cloudflare worker as cron.)
 
 // get new posts from reddit everyday at midnight.
