@@ -46,7 +46,7 @@ schedule.scheduleJob("0 0 * * *", async () => {
 
 // Posts on both account at 0200PM everyday
 schedule.scheduleJob("0 14 * * *", async () => {
-  cablePorn();
+  CablePorn();
   // cableGore();
 });
 
