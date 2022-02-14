@@ -37,7 +37,7 @@ module.exports = {
         T.post("media/metadata/create", meta_params, (err, data, response) => {
           if (err) return console.log(err);
           var params = {
-            status: `${imgData.img.title}\nAuthor: ${imgData.img.author}\n${imgData.img.url}\nvia r/${account.name}`,
+            status: `${imgData.img.title}\nAuthor: u/${imgData.img.Author}\n${imgData.img.url}\nvia r/${account.name}`,
             media_ids: [mediaIdStr],
           };
           // Post Tweet
