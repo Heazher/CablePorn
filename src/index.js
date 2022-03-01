@@ -34,23 +34,24 @@ const account = {
 
 // get new media on start
 getPosts(account.cablePorn);
-// getPosts(account.cableGore);
+getPosts(account.cableGore);
 
 // tweet on start (test)
 CablePorn();
+CableGore();
 
 // Schedules (might move that to an API endpoint using cloudflare worker as cron.)
 
 // get new posts from reddit everyday at midnight.
 schedule.scheduleJob("0 0 * * *", async () => {
   getPosts(account.cablePorn);
-  // getPosts(account.cableGore);
+  getPosts(account.cableGore);
 });
 
 // Posts on both account at 0200PM everyday
 schedule.scheduleJob("0 14 * * *", async () => {
   CablePorn();
-  // cableGore();
+  CableGore();
 });
 
 // Nothing fancy just the fuction to posts the images so the schedule can be easly read.
