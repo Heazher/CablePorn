@@ -48,9 +48,12 @@ module.exports = {
       }
     );
   },
+  // Get the media from the database and send it to the tweet function.
   getMedia: async function (account) {
     if (account.name == "CablePorn") {
       post = await CablePorn.find({ isPosted: false });
+      if(!post.length) return console.log("No post found.");
+      console.log(post);
       img = post[0];
       // encode media
       b64content = fs.readFileSync(
@@ -68,6 +71,7 @@ module.exports = {
       });
     } else if (account.name == "CableGore") {
       post = await CableGore.find({ isPosted: false });
+      if(!post.length) return console.log("No post found.");
       img = post[0];
       // encode media
       b64content = fs.readFileSync(
@@ -89,6 +93,7 @@ module.exports = {
       );
     }
   },
+  // Get new posts from reddit and save them to the database.
   getPosts: async function (account) {
     axios
       .get(
@@ -156,6 +161,7 @@ module.exports = {
         console.log(`${account.name.toUpperCase()}: ${err}`);
       });
   },
+  // Mark the post as posted in the database.
   savePosted: async function (account, postId) {
     if (account.name === "CablePorn") {
       db = CablePorn;
@@ -180,4 +186,43 @@ module.exports = {
         .catch((err) => console.log(err));
     });
   },
+  // tweet older posts
+  tweetOlder: async function (account) {
+    if (account.name === "CablePorn") {
+      db = CablePorn;
+    } else if (account.name === "CableGore") {
+      db = CableGore;
+    } else {
+      return console.log(`DATABASE ERROR: ${account.name}`);
+    }
+    post = await db.find({ isPosted: true });
+    if(!post.length) return console.log("No post found.");
+    img = post[0];
+    // check if the file still exists locally
+    if (!fs.existsSync(Path.join(__dirname, `../images/${account.name}/${img.PostId}.jpg`))) {
+      console.log("File does not exist locally.");
+      // if not, download it
+      const download = async (url, path, callback) => {
+        await request.head(url, async (err, res, body) => {
+          await request(url)
+            .pipe(fs.createWriteStream(path))
+            .on("close", callback);
+        });
+      };
+    }
+    // encode media
+    b64content = fs.readFileSync(
+      `${Path.join(
+        __dirname,
+        `../images/${account.name}/${img.PostId}.jpg`
+      )}`,
+      {
+        encoding: "base64",
+      }
+    );
+    return (img = {
+      img: post[0],
+      b64content: b64content,
+    });
+  }
 };

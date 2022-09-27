@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const schedule = require("node-schedule");
-const { tweet, getMedia, getPosts, savePosted } = require("./functions");
+const { tweet, getMedia, getPosts, savePosted, tweetOlder } = require("./functions");
 const Config = require("../config.json");
 
 // Connect to MongoDB
@@ -46,6 +46,14 @@ CableGore();
 schedule.scheduleJob("0 0 * * *", async () => {
   getPosts(account.cablePorn);
   getPosts(account.cableGore);
+});
+
+// Send old post every 6 hours.
+schedule.scheduleJob("0 */6 * * *", async () => {
+  // for each account
+  for (const [key, value] of Object.entries(account)) {
+    tweetOlder(value);
+  }
 });
 
 // Posts on both account at 0200PM everyday
