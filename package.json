@@ -11,7 +11,7 @@
     "license": "ISC",
     "dependencies": {
         "axios": "^0.21.1",
-        "mongoose": "^5.11.18",
+        "mongoose": "^5.13.15",
         "node-schedule": "^2.0.0",
         "superagent": "^6.1.0",
         "twit": "^2.2.11"
